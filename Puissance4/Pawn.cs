@@ -10,14 +10,21 @@ namespace Puissance4
             Color = color;
         }
 
-        public bool AddPawn(Board board, Player player, int column)
+        public static bool AddPawn(Board board, Player player, int column)
         {
-            for (int i = column; i < Board.NbTiles; i+=7)
+            column -= 1;
+            while (column < Board.NbTiles && board.Tiles[column].Color is Color.Empty)
             {
-                if (board.Tiles[i].Color is Color.Empty)
-                {
-                    board.Tiles[i] = new Pawn(player.Color, board);
-                }
+                column += 7;
+            }
+
+            column -= 7;
+
+            if (column > 0 && board.Tiles[column].Color is Color.Empty  )
+            {
+                board.Tiles[column] = new Pawn(player.Color, board);
+                player.NbPawn -= 1;
+                return true;
             }
 
             return false;

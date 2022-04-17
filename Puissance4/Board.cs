@@ -87,6 +87,14 @@ namespace Puissance4
 
             Console.WriteLine(res);
         }
+
+        public void Rotation( Orientation orientation)
+        {
+            for (int i = 0; i < NbTiles / 2; i++)
+            {
+                (Tiles[i],Tiles[NbTiles - i - 1]) = (Tiles[NbTiles - i - 1],Tiles[i]);
+            }
+        }
     }
 
 
